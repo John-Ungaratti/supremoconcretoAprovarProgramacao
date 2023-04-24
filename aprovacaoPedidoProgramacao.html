@@ -107,6 +107,8 @@
 
 	window.onload = function montaTable() {
 
+		console.log("commit 1");
+
 		var parametros = {
 			idCvtccnpj: parent.dadosUserLogadoPersonalizado().cId,
 			numreg: 751,
@@ -272,7 +274,7 @@
 			"tipoBomba": json.tipoBomba,
 			"tracoSel": json.tracoSel,
 			"tracoSelDes": json.tracoSelDes,
-			"dataProgramacaoEfetiva": document.getElementById("input2").value.split('-').reverse().join('/'),
+			"dataProgramacaoEfetiva": document.getElementById('input2').value.split('-').reverse().join().replaceAll(",", "-"),
 			"numeroProgCommand": document.getElementById('input3').value
 		}
 		
