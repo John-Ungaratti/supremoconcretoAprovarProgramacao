@@ -107,8 +107,6 @@
 
 	window.onload = function montaTable() {
 
-		console.log("commit 2");
-
 		var parametros = {
 			idCvtccnpj: parent.dadosUserLogadoPersonalizado().cId,
 			numreg: 751,
@@ -128,89 +126,89 @@
 
 				var objRetorno = JSON.parse(response);
 				
-				objRetorno.map(({central, contrato, tipoBomba, tipoAplicacao, tracoSel, qtdSolicitada, qtdAberto, respObra, contatoRespObra, observacao, dataProgramacaoSel, listaId, situacao },idx) => {
+				// objRetorno.map(({central, contrato, tipoBomba, tipoAplicacao, tracoSel, qtdSolicitada, qtdAberto, respObra, contatoRespObra, observacao, dataProgramacaoSel, listaId, situacao },idx) => {
 					
-					if(tipoBomba.includes("Ã§") || tipoBomba.includes("A¡") || tipoBomba.includes("Ã¡")){
-						tipoBomba = tipoBomba.replace('Ã§', 'ç');
-						tipoBomba = tipoBomba.replace('A¡', 'á');
-						tipoBomba = tipoBomba.replace('Ã¡', 'á');
-					} 
+				// 	if(tipoBomba.includes("Ã§") || tipoBomba.includes("A¡") || tipoBomba.includes("Ã¡")){
+				// 		tipoBomba = tipoBomba.replace('Ã§', 'ç');
+				// 		tipoBomba = tipoBomba.replace('A¡', 'á');
+				// 		tipoBomba = tipoBomba.replace('Ã¡', 'á');
+				// 	} 
 
-					if(tipoAplicacao.includes("Ã©") || tipoAplicacao.includes("A©")){
-						tipoAplicacao = tipoAplicacao.replace('Ã©', 'é');
-						tipoAplicacao = tipoAplicacao.replace('A©', 'é');
-					} 
+				// 	if(tipoAplicacao.includes("Ã©") || tipoAplicacao.includes("A©")){
+				// 		tipoAplicacao = tipoAplicacao.replace('Ã©', 'é');
+				// 		tipoAplicacao = tipoAplicacao.replace('A©', 'é');
+				// 	} 
 
-					if(respObra.includes("Ã¡") || respObra.includes("Ãª") || respObra.includes("Ã£") ||  respObra.includes("Ã¢") || respObra.includes("Ã´") ){
-						respObra = respObra.replace("Ã¡", "á");
-						respObra = respObra.replace("Ã£", "ã");
-						respObra = respObra.replace("Ãª", "ê");
-						respObra = respObra.replace("Ã¢", "â");
-						respObra = respObra.replace("Ã´", "ô");
-					}
+				// 	if(respObra.includes("Ã¡") || respObra.includes("Ãª") || respObra.includes("Ã£") ||  respObra.includes("Ã¢") || respObra.includes("Ã´") ){
+				// 		respObra = respObra.replace("Ã¡", "á");
+				// 		respObra = respObra.replace("Ã£", "ã");
+				// 		respObra = respObra.replace("Ãª", "ê");
+				// 		respObra = respObra.replace("Ã¢", "â");
+				// 		respObra = respObra.replace("Ã´", "ô");
+				// 	}
 
-					if(observacao.includes("Ã¡") || observacao.includes("Ãª") || observacao.includes("Ã£") || observacao.includes("Ã©") || observacao.includes("A©") || observacao.includes("Ã§") || observacao.includes("Ã???????") || observacao.includes("Ã³") 
-					|| observacao.includes("Ã°")  ){
-						observacao = observacao.replace("Ã¡", "á");
-						observacao = observacao.replace("Ã£", "ã");
-						observacao = observacao.replace("Ãª", "ê");
-						observacao = observacao.replace('Ã©', 'é');
-						observacao = observacao.replace('A©', 'é');
-						observacao = observacao.replace('Ã§', 'ç');
-						observacao = observacao.replace('Ã?', 'í');
-						observacao = observacao.replace('Ã³', 'ó');
-						observacao = observacao.replace('Ãº', 'ú');
-					}
-					programacaoSel = objRetorno;
-					var data =  dataProgramacaoSel;
-					var dataFormatada = data.split("-").reverse().join('-');
-					let sit;
+				// 	if(observacao.includes("Ã¡") || observacao.includes("Ãª") || observacao.includes("Ã£") || observacao.includes("Ã©") || observacao.includes("A©") || observacao.includes("Ã§") || observacao.includes("Ã???????") || observacao.includes("Ã³") 
+				// 	|| observacao.includes("Ã°")  ){
+				// 		observacao = observacao.replace("Ã¡", "á");
+				// 		observacao = observacao.replace("Ã£", "ã");
+				// 		observacao = observacao.replace("Ãª", "ê");
+				// 		observacao = observacao.replace('Ã©', 'é');
+				// 		observacao = observacao.replace('A©', 'é');
+				// 		observacao = observacao.replace('Ã§', 'ç');
+				// 		observacao = observacao.replace('Ã?', 'í');
+				// 		observacao = observacao.replace('Ã³', 'ó');
+				// 		observacao = observacao.replace('Ãº', 'ú');
+				// 	}
+				// 	programacaoSel = objRetorno;
+				// 	var data =  dataProgramacaoSel;
+				// 	var dataFormatada = data.split("-").reverse().join('-');
+				// 	let sit;
 
-					if(situacao == "R"){
-						sit = "Reprovado"
-						programacoesSol += ` <tr id="linhaTr-${idx}" name="tbodyProgs" style="vertical-align: middle; text-align: center;">
-									  <th scope="row">${central}</th>
-									  <td>${contrato}</td>
-									  <td>${sit}</td> 
-									  <td>${tipoBomba}</td>
-									  <td>${tipoAplicacao}</td>
-									  <td>${tracoSel}</td>
-									  <td>${qtdSolicitada}</td>
-									  <td>${qtdAberto}</td>
-									  <td>${respObra}</td>
-									  <td>${contatoRespObra}</td>
-									  <td>${dataFormatada}</td>
-									  <td>${observacao}</td>
-									  <td style="font-size: 20px">
-									  </td>
-									</tr>`;
-					 }
-				     else if (situacao == "S"){
-						sit = "Solicitado"
-						programacoesSol += ` <tr id="linhaTr-${idx}" name="tbodyProgs" style="vertical-align: middle; text-align: center;">
-									  <th scope="row">${central}</th>
-									  <td>${contrato}</td>
-									  <td>${sit}</td> 
-									  <td>${tipoBomba}</td>
-									  <td>${tipoAplicacao}</td>
-									  <td>${tracoSel}</td>
-									  <td>${qtdSolicitada}</td>
-									  <td>${qtdAberto}</td>
-									  <td>${respObra}</td>
-									  <td>${contatoRespObra}</td>
-									  <td>${dataFormatada}</td>
-									  <td>${observacao}</td>
-									  <td style="font-size: 20px">
-										<span type="button"><i class="bi bi-check-square-fill" style="color: limegreen" onclick="abrirModalConfirmacao(${listaId}, ${idx})" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Confirmar ProgramaÃ§Ã£o"></i></span>
-										<span type="button"><i class="bi bi-x-square-fill" style="color: red" onclick="abrirModalReprovacao(${listaId},${idx})"></i></span>
-									  </td>
-									</tr>`;
-					 }
-				     else if (situacao == "A"){
-						sit = "Aprovado"
-					 }
+				// 	if(situacao == "R"){
+				// 		sit = "Reprovado"
+				// 		programacoesSol += ` <tr id="linhaTr-${idx}" name="tbodyProgs" style="vertical-align: middle; text-align: center;">
+				// 					  <th scope="row">${central}</th>
+				// 					  <td>${contrato}</td>
+				// 					  <td>${sit}</td> 
+				// 					  <td>${tipoBomba}</td>
+				// 					  <td>${tipoAplicacao}</td>
+				// 					  <td>${tracoSel}</td>
+				// 					  <td>${qtdSolicitada}</td>
+				// 					  <td>${qtdAberto}</td>
+				// 					  <td>${respObra}</td>
+				// 					  <td>${contatoRespObra}</td>
+				// 					  <td>${dataFormatada}</td>
+				// 					  <td>${observacao}</td>
+				// 					  <td style="font-size: 20px">
+				// 					  </td>
+				// 					</tr>`;
+				// 	}
+				//      else if (situacao == "S"){
+				// 		sit = "Solicitado"
+				// 		programacoesSol += ` <tr id="linhaTr-${idx}" name="tbodyProgs" style="vertical-align: middle; text-align: center;">
+				// 					  <th scope="row">${central}</th>
+				// 					  <td>${contrato}</td>
+				// 					  <td>${sit}</td> 
+				// 					  <td>${tipoBomba}</td>
+				// 					  <td>${tipoAplicacao}</td>
+				// 					  <td>${tracoSel}</td>
+				// 					  <td>${qtdSolicitada}</td>
+				// 					  <td>${qtdAberto}</td>
+				// 					  <td>${respObra}</td>
+				// 					  <td>${contatoRespObra}</td>
+				// 					  <td>${dataFormatada}</td>
+				// 					  <td>${observacao}</td>
+				// 					  <td style="font-size: 20px">
+				// 						<span type="button"><i class="bi bi-check-square-fill" style="color: limegreen" onclick="abrirModalConfirmacao(${listaId}, ${idx})" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Confirmar ProgramaÃ§Ã£o"></i></span>
+				// 						<span type="button"><i class="bi bi-x-square-fill" style="color: red" onclick="abrirModalReprovacao(${listaId},${idx})"></i></span>
+				// 					  </td>
+				// 					</tr>`;
+				// 	 }
+				//      else if (situacao == "A"){
+				// 		sit = "Aprovado"
+				// 	 }
 					
-				});
+				// });
 				document.getElementById("tbodyProgs").innerHTML = programacoesSol; 
 				
 			},
