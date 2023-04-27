@@ -107,7 +107,7 @@
 
 	window.onload = function montaTable() {
 
-		console.log("commit 2");
+		console.log("commit 4");
 
 		var parametros = {
 			idCvtccnpj: parent.dadosUserLogadoPersonalizado().cId,
@@ -122,15 +122,15 @@
 			data: JSON.stringify(parametros),
 			success: function (response) {
 
-				console.log(response);
+				//console.log(response);
 
 				$("#loadingModal").modal('hide');
 
 				var objRetorno = JSON.parse(response);
 
-				console.log(objRetorno);
+				//console.log(objRetorno);
 				
-				objRetorno.map(({central, contrato, tipoBomba, tipoAplicacao, tracoSel, qtdSolicitada, qtdAberto, respObra, contatoRespObra, observacao, dataProgramacaoSel, listaId, situacao },idx) => {
+				objRetorno.json.map(({programacoes, observacao, endereco, tipoAplicacao, status, contrato, contatoRespObra, central, desCentral, respObra, tipoBomba, listaId },idx) => {
 					
 					if(tipoBomba.includes("ç") || tipoBomba.includes("A�") || tipoBomba.includes("á")){
 						tipoBomba = tipoBomba.replace('ç', '�');
@@ -164,43 +164,43 @@
 						observacao = observacao.replace('ú', '�');
 					}
 					programacaoSel = objRetorno;
-					var data =  dataProgramacaoSel;
-					var dataFormatada = data.split("-").reverse().join('-');
+					var data =  programacoes[0].dataProgramacaoSel;
+					//var dataFormatada = data.split("/").reverse().join('-');
 					let sit;
 
-					if(situacao == "R"){
+					if(status == "R"){
 						sit = "Reprovado"
 						programacoesSol += ` <tr id="linhaTr-${idx}" name="tbodyProgs" style="vertical-align: middle; text-align: center;">
-									  <th scope="row">${central}</th>
+									  <th scope="row">${desCentral}</th>
 									  <td>${contrato}</td>
 									  <td>${sit}</td> 
 									  <td>${tipoBomba}</td>
 									  <td>${tipoAplicacao}</td>
-									  <td>${tracoSel}</td>
-									  <td>${qtdSolicitada}</td>
-									  <td>${qtdAberto}</td>
+									  <td>${programacoes[0].tracoSel}</td>
+									  <td>${programacoes[0].qtdSolicitada}</td>
+									  <td>${programacoes[0].qtdAberto}</td>
 									  <td>${respObra}</td>
 									  <td>${contatoRespObra}</td>
-									  <td>${dataFormatada}</td>
+									  <td>${data}</td>
 									  <td>${observacao}</td>
 									  <td style="font-size: 20px">
 									  </td>
 									</tr>`;
 					}
-				     else if (situacao == "S"){
+				     else if (status == "Pendente"){
 						sit = "Solicitado"
 						programacoesSol += ` <tr id="linhaTr-${idx}" name="tbodyProgs" style="vertical-align: middle; text-align: center;">
-									  <th scope="row">${central}</th>
+									  <th scope="row">${desCentral}</th>
 									  <td>${contrato}</td>
 									  <td>${sit}</td> 
 									  <td>${tipoBomba}</td>
 									  <td>${tipoAplicacao}</td>
-									  <td>${tracoSel}</td>
-									  <td>${qtdSolicitada}</td>
-									  <td>${qtdAberto}</td>
+									  <td>${programacoes[0].tracoSel}</td>
+									  <td>${programacoes[0].qtdSolicitada}</td>
+									  <td>${programacoes[0].qtdAberto}</td>
 									  <td>${respObra}</td>
 									  <td>${contatoRespObra}</td>
-									  <td>${dataFormatada}</td>
+									  <td>${data}</td>
 									  <td>${observacao}</td>
 									  <td style="font-size: 20px">
 										<span type="button"><i class="bi bi-check-square-fill" style="color: limegreen" onclick="abrirModalConfirmacao(${listaId}, ${idx})" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Confirmar Programação"></i></span>
@@ -208,7 +208,7 @@
 									  </td>
 									</tr>`;
 					 }
-				     else if (situacao == "A"){
+				     else if (status == "A"){
 						sit = "Aprovado"
 					 }
 					
