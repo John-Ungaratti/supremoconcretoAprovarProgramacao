@@ -19,8 +19,15 @@
 
 <body>
 
+	<div>
+		<button id="abreModalAprovadas" type="button" class="btn btn-secondary"
+			style="background: #edb926;border-color: #edb926;">Programações Aprovadas</button>
+		<button id="abreModalRejeitadas" type="button" class="btn btn-secondary"
+			style="background: #edb926;border-color: #edb926;">Programações Rejeitadas</button>
+	</div>
+
 	<!--Tabela-->
-	<table class="table table-hover table-responsive"> 
+	<table class="table table-hover table-responsive">
 		<thead>
 			<tr style="text-align: center">
 				<th scope="col">Central</th>
@@ -38,51 +45,129 @@
 				<th scope="col"></th>
 			</tr>
 		</thead>
-		<tbody id="tbodyProgs" >
+		<tbody id="tbodyProgs">
 		</tbody>
 	</table>
 
-	<!--Modal Aprovação-->
-	<form id="formAprovacao">
-		<div class="modal fade" id="modalConfirmacao" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacaoLabel" data-backdrop="static">
-		<div class="modal-dialog" role="document">
-		  <div class="modal-content">
+	<!--Tabela Aprovadas-->
+	<div class="modal fade" id="modalProgramacoesAprovadas" tabindex="-1" role="dialog"
+		aria-labelledby="modalProgramacoesAprovadas" data-backdrop="static">
+		<div class="modal-dialog modal-fullscreen" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="modalProgramacoesAprovadas">Programações Aprovadas</h4>
+				</div>
+				<div class="modal-body">
+					<div class="table-responsive">
+						<table class="table table-hover">
+							<thead>
+								<tr style="text-align: center">
+									<th scope="col">Central</th>
+									<th scope="col">Contrato</th>
+									<th scope="col">Situação</th>
+									<th scope="col">Tipo Bomba</th>
+									<th scope="col">Tipo Aplicação</th>
+									<th scope="col">Traço Selecionado</th>
+									<th scope="col">Qtd. Solicitada</th>
+									<th scope="col">Qtd. em Aberto</th>
+									<th scope="col">Resp. Obra</th>
+									<th scope="col">Contato Resp. Obra</th>
+									<th scope="col">Data Programação</th>
+								</tr>
+							</thead>
+							<tbody id="progAprovadas">
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button id="fecharProgsAprov" type="button" class="btn btn-primary">Fechar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--Tabela Rejeitadas-->
+	<div class="modal fade" id="modalProgramacoesRejeitadas" tabindex="-1" role="dialog"
+	aria-labelledby="modalProgramacoesRejeitadas" data-backdrop="static">
+	<div class="modal-dialog modal-fullscreen" role="document">
+		<div class="modal-content">
 			<div class="modal-header">
-			  <h4 class="modal-title" id="modalConfirmacaoLabel">Aprovar Programação</h4>
+				<h4 class="modal-title" id="modalProgramacoesRejeitadas">Programações Rejeitadas</h4>
 			</div>
 			<div class="modal-body">
-			  <div class="form-group">
-				<label for="input2">Data da Confirmação</label>
-				<input type="date" class="form-control" id="input2" required>
-				<label for="input3">Número Programação no Command </label>
-				<input type="number" class="form-control" id="input3" required>
-			  </div>
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr style="text-align: center">
+								<th scope="col">Central</th>
+								<th scope="col">Contrato</th>
+								<th scope="col">Situação</th>
+								<th scope="col">Tipo Bomba</th>
+								<th scope="col">Tipo Aplicação</th>
+								<th scope="col">Traço Selecionado</th>
+								<th scope="col">Qtd. Solicitada</th>
+								<th scope="col">Qtd. em Aberto</th>
+								<th scope="col">Resp. Obra</th>
+								<th scope="col">Contato Resp. Obra</th>
+								<th scope="col">Data Programação</th>
+							</tr>
+						</thead>
+						<tbody id="progRejeitadas">
+						</tbody>
+					</table>
+				</div>
 			</div>
 			<div class="modal-footer">
-			  <button id="cancelarBtn" type="button" class="btn btn-secondary">Cancelar</button>
-			  <button id="confirmarBtn" type="submit" class="btn btn-primary" >Confirmar</button>
+				<button id="fecharProgsRej" type="button" class="btn btn-primary">Fechar</button>
 			</div>
-		  </div>
 		</div>
+	</div>
+</div>
+
+	<!--Modal Aprovação-->
+	<form id="formAprovacao">
+		<div class="modal fade" id="modalConfirmacao" tabindex="-1" role="dialog"
+			aria-labelledby="modalConfirmacaoLabel" data-backdrop="static">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="modalConfirmacaoLabel">Aprovar Programação</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="input2">Data da Confirmação</label>
+							<input type="date" class="form-control" id="input2" required>
+							<label for="input3">Número Programação no Command </label>
+							<input type="number" class="form-control" id="input3" required>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button id="cancelarBtn" type="button" class="btn btn-secondary">Cancelar</button>
+						<button id="confirmarBtn" type="submit" class="btn btn-primary">Confirmar</button>
+					</div>
+				</div>
+			</div>
 		</div>
 	</form>
 
 	<!--Modal Reprovação-->
 	<form id="formReprovacao">
-		<div class="modal fade" id="modalReprovacao" tabindex="-1" role="dialog" aria-labelledby="modalReprovacaoLabel" data-backdrop="static">
+		<div class="modal fade" id="modalReprovacao" tabindex="-1" role="dialog" aria-labelledby="modalReprovacaoLabel"
+			data-backdrop="static">
 			<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-				<h4 class="modal-title" id="modalReprovacaoLabel">Reprovar Programação</h4>
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="modalReprovacaoLabel">Reprovar Programação</h4>
+					</div>
+					<div class="modal-footer">
+						<button id="cancelarBtnRep" type="button" class="btn btn-secondary">Cancelar</button>
+						<button id="reprovarBtn" type="button" class="btn btn-primary">Confirmar</button>
+					</div>
 				</div>
-				<div class="modal-footer">
-				<button id="cancelarBtnRep" type="button" class="btn btn-secondary">Cancelar</button>
-				<button id="reprovarBtn" type="button" class="btn btn-primary" >Confirmar</button>
-				</div>
-			</div>
 			</div>
 		</div>
-    </form>
+	</form>
 
 	<!--Modal Loading-->
 	<div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" style="display: none;">
@@ -91,9 +176,9 @@
 				<div class="modal-body text-center">
 					<span style="font-weight: 400;font-size: 17px;">Carregando, por favor, aguarde...</span>
 					<br><img src="images/loader/ajax-loader-red.gif" style="width: 100px;">
-				</div>			
-	    	</div>
-	  	</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 
@@ -104,10 +189,11 @@
 	var programacaoSel;
 	var listaIdSel;
 	var idxSel;
+	var progsAprov = "";
+	var progsRej = "";
 
-	window.onload = function montaTable() {
 
-		console.log("commit 5");
+	function montaTableAprovadas() {
 
 		var parametros = {
 			idCvtccnpj: parent.dadosUserLogadoPersonalizado().cId,
@@ -115,62 +201,23 @@
 			pRotina: "lerProgramacao",
 			pCodCli: parent.dadosUserLogadoPersonalizado().rCod
 		};
-    
-		 $.ajax({
+
+		$.ajax({
 			url: parent.dadosUserLogadoPersonalizado().cContextIntegracao + '/rest/Listas/executarRequisicaoExterna',
 			type: "POST",
 			data: JSON.stringify(parametros),
 			success: function (response) {
 
-				//console.log(response);
-
-				$("#loadingModal").modal('hide');
-
 				var objRetorno = JSON.parse(response);
 
-				//console.log(objRetorno);
-				
-				objRetorno.json.map(({programacoes, observacao, endereco, tipoAplicacao, status, contrato, contatoRespObra, central, desCentral, respObra, tipoBomba, listaId },idx) => {
-					
-					if(tipoBomba.includes("Ã§") || tipoBomba.includes("A¡") || tipoBomba.includes("Ã¡")){
-						tipoBomba = tipoBomba.replace('Ã§', 'ç');
-						tipoBomba = tipoBomba.replace('A¡', 'á');
-						tipoBomba = tipoBomba.replace('Ã¡', 'á');
-					} 
+				objRetorno.json.map(({ programacoes, observacao, endereco, tipoAplicacao, status, contrato, contatoRespObra, central, desCentral, respObra, tipoBomba, listaId }, idx) => {
 
-					if(tipoAplicacao.includes("Ã©") || tipoAplicacao.includes("A©")){
-						tipoAplicacao = tipoAplicacao.replace('Ã©', 'é');
-						tipoAplicacao = tipoAplicacao.replace('A©', 'é');
-					} 
-
-					if(respObra.includes("Ã¡") || respObra.includes("Ãª") || respObra.includes("Ã£") ||  respObra.includes("Ã¢") || respObra.includes("Ã´") ){
-						respObra = respObra.replace("Ã¡", "á");
-						respObra = respObra.replace("Ã£", "ã");
-						respObra = respObra.replace("Ãª", "ê");
-						respObra = respObra.replace("Ã¢", "â");
-						respObra = respObra.replace("Ã´", "ô");
-					}
-
-					if(observacao.includes("Ã¡") || observacao.includes("Ãª") || observacao.includes("Ã£") || observacao.includes("Ã©") || observacao.includes("A©") || observacao.includes("Ã§") || observacao.includes("Ã???????") || observacao.includes("Ã³") 
-					|| observacao.includes("Ã°")  ){
-						observacao = observacao.replace("Ã¡", "á");
-						observacao = observacao.replace("Ã£", "ã");
-						observacao = observacao.replace("Ãª", "ê");
-						observacao = observacao.replace('Ã©', 'é');
-						observacao = observacao.replace('A©', 'é');
-						observacao = observacao.replace('Ã§', 'ç');
-						observacao = observacao.replace('Ã?', 'í');
-						observacao = observacao.replace('Ã³', 'ó');
-						observacao = observacao.replace('Ãº', 'ú');
-					}
-					programacaoSel = objRetorno.json;
-					var data =  programacoes[0].dataProgramacaoSel;
-					//var dataFormatada = data.split("/").reverse().join('-');
+					var data = programacoes[0].dataProgramacaoSel;
 					let sit;
 
-					if(status == "R"){
-						sit = "Reprovado"
-						programacoesSol += ` <tr id="linhaTr-${idx}" name="tbodyProgs" style="vertical-align: middle; text-align: center;">
+					if (status == "Programação Confirmada") {
+						sit = "Aprovada"
+						progsAprov += `<tr id="linhaTr-${idx}" name="progAprovadas" style="vertical-align: middle; text-align: center;">
 									  <th scope="row">${desCentral}</th>
 									  <td>${contrato}</td>
 									  <td>${sit}</td> 
@@ -183,11 +230,121 @@
 									  <td>${contatoRespObra}</td>
 									  <td>${data}</td>
 									  <td>${observacao}</td>
-									  <td style="font-size: 20px">
-									  </td>
 									</tr>`;
 					}
-				     else if (status == "Pendente"){
+
+				});
+				document.getElementById("progAprovadas").innerHTML = progsAprov;
+			},
+		});
+	};
+
+	function montaTableRejeitadas() {
+
+		var parametros = {
+			idCvtccnpj: parent.dadosUserLogadoPersonalizado().cId,
+			numreg: 751,
+			pRotina: "lerProgramacao",
+			pCodCli: parent.dadosUserLogadoPersonalizado().rCod
+		};
+
+		$.ajax({
+			url: parent.dadosUserLogadoPersonalizado().cContextIntegracao + '/rest/Listas/executarRequisicaoExterna',
+			type: "POST",
+			data: JSON.stringify(parametros),
+			success: function (response) {
+
+				var objRetorno = JSON.parse(response);
+
+				objRetorno.json.map(({ programacoes, observacao, endereco, tipoAplicacao, status, contrato, contatoRespObra, central, desCentral, respObra, tipoBomba, listaId }, idx) => {
+
+					var data = programacoes[0].dataProgramacaoSel;
+					let sit;
+
+					if (status == "Programação Rejeitada") {
+						sit = "Rejeitada"
+						progsRej += `<tr id="linhaTr-${idx}" name="progRejeitadas" style="vertical-align: middle; text-align: center;">
+									  <th scope="row">${desCentral}</th>
+									  <td>${contrato}</td>
+									  <td>${sit}</td> 
+									  <td>${tipoBomba}</td>
+									  <td>${tipoAplicacao}</td>
+									  <td>${programacoes[0].tracoSel}</td>
+									  <td>${programacoes[0].qtdSolicitada}</td>
+									  <td>${programacoes[0].qtdAberto}</td>
+									  <td>${respObra}</td>
+									  <td>${contatoRespObra}</td>
+									  <td>${data}</td>
+									  <td>${observacao}</td>
+									</tr>`;
+					}
+
+				});
+				document.getElementById("progRejeitadas").innerHTML = progsRej;
+			},
+		});
+	};
+
+	window.onload = function montaTable() {
+
+		console.log("commit 11");
+
+		var parametros = {
+			idCvtccnpj: parent.dadosUserLogadoPersonalizado().cId,
+			numreg: 751,
+			pRotina: "lerProgramacao",
+			pCodCli: parent.dadosUserLogadoPersonalizado().rCod
+		};
+
+		$.ajax({
+			url: parent.dadosUserLogadoPersonalizado().cContextIntegracao + '/rest/Listas/executarRequisicaoExterna',
+			type: "POST",
+			data: JSON.stringify(parametros),
+			success: function (response) {
+
+				$("#loadingModal").modal('hide');
+
+				var objRetorno = JSON.parse(response);
+
+				objRetorno.json.map(({ programacoes, observacao, endereco, tipoAplicacao, status, contrato, contatoRespObra, central, desCentral, respObra, tipoBomba, listaId }, idx) => {
+
+					if (tipoBomba.includes("Ã§") || tipoBomba.includes("A¡") || tipoBomba.includes("Ã¡")) {
+						tipoBomba = tipoBomba.replace('Ã§', 'ç');
+						tipoBomba = tipoBomba.replace('A¡', 'á');
+						tipoBomba = tipoBomba.replace('Ã¡', 'á');
+					}
+
+					if (tipoAplicacao.includes("Ã©") || tipoAplicacao.includes("A©")) {
+						tipoAplicacao = tipoAplicacao.replace('Ã©', 'é');
+						tipoAplicacao = tipoAplicacao.replace('A©', 'é');
+					}
+
+					if (respObra.includes("Ã¡") || respObra.includes("Ãª") || respObra.includes("Ã£") || respObra.includes("Ã¢") || respObra.includes("Ã´")) {
+						respObra = respObra.replace("Ã¡", "á");
+						respObra = respObra.replace("Ã£", "ã");
+						respObra = respObra.replace("Ãª", "ê");
+						respObra = respObra.replace("Ã¢", "â");
+						respObra = respObra.replace("Ã´", "ô");
+					}
+
+					if (observacao.includes("Ã¡") || observacao.includes("Ãª") || observacao.includes("Ã£") || observacao.includes("Ã©") || observacao.includes("A©") || observacao.includes("Ã§") || observacao.includes("Ã???????") || observacao.includes("Ã³")
+						|| observacao.includes("Ã°")) {
+						observacao = observacao.replace("Ã¡", "á");
+						observacao = observacao.replace("Ã£", "ã");
+						observacao = observacao.replace("Ãª", "ê");
+						observacao = observacao.replace('Ã©', 'é');
+						observacao = observacao.replace('A©', 'é');
+						observacao = observacao.replace('Ã§', 'ç');
+						observacao = observacao.replace('Ã?', 'í');
+						observacao = observacao.replace('Ã³', 'ó');
+						observacao = observacao.replace('Ãº', 'ú');
+					}
+					programacaoSel = objRetorno.json;
+					var data = programacoes[0].dataProgramacaoSel;
+					//var dataFormatada = data.split("/").reverse().join('-');
+					let sit;
+
+					if (status == "Pendente") {
 						sit = "Solicitado"
 						programacoesSol += ` <tr id="linhaTr-${idx}" name="tbodyProgs" style="vertical-align: middle; text-align: center;">
 									  <th scope="row">${desCentral}</th>
@@ -207,14 +364,11 @@
 										<span type="button"><i class="bi bi-x-square-fill" style="color: red" onclick="abrirModalReprovacao(${listaId},${idx})"></i></span>
 									  </td>
 									</tr>`;
-					 }
-				     else if (status == "A"){
-						sit = "Aprovado"
-					 }
-					
+					}
+
 				});
-				document.getElementById("tbodyProgs").innerHTML = programacoesSol; 
-				
+				document.getElementById("tbodyProgs").innerHTML = programacoesSol;
+
 			},
 			beforeSend: function () {
 				$("#loadingModal").modal('show');
@@ -225,18 +379,18 @@
 			error: function (response) {
 				alert(response);
 			}
-		}); 
+		});
 	};
-	
-	function reprovarProg(id, idx){
-		
+
+	function reprovarProg(id, idx) {
+
 		var parametros = {
 			idCvtccnpj: parent.dadosUserLogadoPersonalizado().cId,
 			numreg: 751,
 			pRotina: "reprovarProgramacao",
-			pIdLog : id
+			pIdLog: id
 		};
-		
+
 		$.ajax({
 			url: parent.dadosUserLogadoPersonalizado().cContextIntegracao + '/rest/Listas/executarRequisicaoExterna',
 			type: "POST",
@@ -244,7 +398,7 @@
 			success: function (response) {
 				document.getElementById(`linhaTr-${idx}`).remove();
 				$("#modalReprovacao").modal('hide');
-				
+
 			},
 			beforeSend: function () {
 				$("#loadingModal").modal('show');
@@ -256,19 +410,19 @@
 			error: function (response) {
 				alert(response);
 			}
-		});	
+		});
 	};
-	
-	function aprovarProg(id, idx, json){
 
-		json = json.filter(({listaId}) => listaId == id )[0];
+	function aprovarProg(id, idx, json) {
+
+		json = json.filter(({ listaId }) => listaId == id)[0];
 
 
 		var pJson = {
 			"central": json.central,
 			"contatoRespObra": json.contatoRespObra,
 			"contrato": json.contrato,
-			"dataProgramacaoSel": json.dataProgramacaoSel, 
+			"dataProgramacaoSel": json.dataProgramacaoSel,
 			"endereco": json.endereco,
 			"observacao": json.observacao,
 			"qtdAberto": json.qtdAberto,
@@ -281,15 +435,15 @@
 			"dataProgramacaoEfetiva": document.getElementById('input2').value.split('-').join().replaceAll(",", "-"),
 			"numeroProgCommand": document.getElementById('input3').value
 		}
-		
+
 		var parametros = {
 			idCvtccnpj: parent.dadosUserLogadoPersonalizado().cId,
 			numreg: 751,
-			pRotina: "aprovarProgramacao", 
-			pIdLog : id,
+			pRotina: "aprovarProgramacao",
+			pIdLog: id,
 			pJson: pJson
 		};
-		
+
 		$.ajax({
 			url: parent.dadosUserLogadoPersonalizado().cContextIntegracao + '/rest/Listas/executarRequisicaoExterna',
 			type: "POST",
@@ -308,11 +462,11 @@
 			error: function (response) {
 				alert(response);
 			}
-		});	
-	
+		});
+
 	};
 
-	function abrirModalConfirmacao(listaId, idx){
+	function abrirModalConfirmacao(listaId, idx) {
 
 		console.log(programacaoSel);
 
@@ -324,13 +478,13 @@
 	$("#confirmarBtn").click(function () {
 
 		var formulario = document.getElementById("formAprovacao");
-        if (!formulario.checkValidity()) {
-        } else {
-			aprovarProg(listaIdSel,idxSel, programacaoSel);
-        }
-    });
+		if (!formulario.checkValidity()) {
+		} else {
+			aprovarProg(listaIdSel, idxSel, programacaoSel);
+		}
+	});
 
-	function abrirModalReprovacao(listaId, idx){
+	function abrirModalReprovacao(listaId, idx) {
 
 		listaIdSel = listaId;
 		idxSel = idx;
@@ -338,19 +492,43 @@
 	}
 
 	$("#reprovarBtn").click(function () {
-		reprovarProg(listaIdSel,idxSel);
-    });
+		reprovarProg(listaIdSel, idxSel);
+	});
 
 	$("#cancelarBtn").click(function () {
 		$("#modalConfirmacao").modal('hide');
-    });
+	});
+
+	$("#fecharProgsAprov").click(function () {
+		$("#modalProgramacoesAprovadas").modal('hide');
+		progsAprov = "";
+	});
+
+	$("#fecharProgsRej").click(function () {
+		$("#modalProgramacoesRejeitadas").modal('hide');
+		progsRej = "";
+	});
+	
+	
 
 	$("#cancelarBtnRep").click(function () {
 		$("#modalReprovacao").modal('hide');
-    });
+	});
+
+	$("#abreModalAprovadas").click(function () {
+		$("#modalProgramacoesAprovadas").modal('show');
+		montaTableAprovadas();
+		
+	});
+
+	$("#abreModalRejeitadas").click(function () {
+		$("#modalProgramacoesRejeitadas").modal('show');
+		montaTableRejeitadas();
+		
+	});
+
 	
-	
-       
+
 </script>
 
 </html>
